@@ -14,13 +14,15 @@ router.post('/add', async (req, res) => {
   if(!name||!type|| !propertyType||!price) return res.status(500).json({ error: 'Missing fields' }); 
 
   try {
-    const prop = new Prop({...req.body,price:Number(price)});
+    console.log(req.user)
+    const prop = new Prop({...req.body,price:Number(price),createdBy:req.user.userId});
     await prop.save();
 
     return res.status(200).json({ 
       message: 'Login successful'
     });
   }catch (error) {
+    console.log(error)
     res.status(500).json({ error: error.message });
   }
 });
@@ -32,7 +34,7 @@ router.put('/edit/:id', async (req, res) => {
     propertyType,
     price
   }= req.body;
-  
+  console.log(req.body,'body')
   if(!name || !type || !propertyType || !price) return res.status(500).json({ error: 'Missing fields' });
 
   try {
@@ -41,6 +43,7 @@ router.put('/edit/:id', async (req, res) => {
       message: 'Successfully updated'
     });
   }catch (error) {
+    console.log(error,'erro')
     res.status(500).json({ error: error.message });
   }
 });

@@ -16,6 +16,10 @@ const propSchema = new mongoose.Schema({
   price: {
     type: Number,
     required: true,
+  },
+  createdBy:{
+    type:  String,
+    required: true
   }
 }, {
   timestamps: true, // Automatically adds createdAt and updatedAt fields
